@@ -78,8 +78,8 @@ echo
 
 grep '^{' ${logfiles[pachd]} |
 mlr --json --no-jlistwrap having-fields --at-least time,message then filter -s start_time=$start_time -s end_time=$end_time '
-  (@start_time != "" || $time >= @start_time) &&
-  (is_empty(@end_time) || $time <= @end_time) &&
+  (@start_time == "" || $time >= @start_time) &&
+  (@end_time == "" || $time <= @end_time) &&
   $message =~ "(request|response) for.*/(.*)"
 ' then put '
 
